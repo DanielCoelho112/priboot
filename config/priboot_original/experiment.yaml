@@ -1,0 +1,13 @@
+description: "PRIBOOT agent."
+host: "127.0.0.1"
+port: 2000
+tm_port: 8000
+tm_seed: 0
+timeout: 200
+track: SENSORS
+fps: 20 
+seed: 0
+routes_idxs: 0,1,2,3,4,5,6,7,8,9
+routes: routes_validation.xml 
+results_file: results.json
+debug: 0

@@ -1,0 +1,47 @@
+FROM pytorch/pytorch:1.12.0-cuda11.3-cudnn8-runtime
+
+
+
+COPY requirements.txt /tmp/
+RUN pip install --requirement /tmp/requirements.txt
+
+RUN apt-get update
+RUN apt-get install ffmpeg libsm6 libxext6  -y
+
+
+RUN pip install torch==1.13.0 --upgrade
+RUN pip install torchvision==0.14.0 --upgrade
+
+WORKDIR /root
+
+RUN mkdir /root/results 
+RUN mkdir /root/results/priboot
+RUN mkdir /root/priboot
+RUN mkdir /root/memory
+
+ENV PRIBOOT_ROOT="/root/priboot"
+
+
+ENV CARLA_ROOT="/root/priboot/carla"
+ENV SCENARIO_RUNNER_ROOT="/root/priboot/scenario_runner"
+ENV LEADERBOARD_ROOT="/root/priboot/leaderboard"
+ENV PYTHONPATH="/root/priboot:${CARLA_ROOT}/PythonAPI/carla/:${SCENARIO_RUNNER_ROOT}:${LEADERBOARD_ROOT}:${CARLA_ROOT}/PythonAPI/carla/dist/carla-0.9.13-py3.7-linux-x86_64.egg:$PYTHONPATH"
+
+ENV ROUTES="${LEADERBOARD_ROOT}/data/routes_training.xml"
+ENV REPETITIONS=1
+ENV DEBUG_CHALLENGE=0
+ENV TEAM_AGENT="${LEADERBOARD_ROOT}/leaderboard/autoagents/npc_agent.py"
+ENV CHECKPOINT_ENDPOINT="/root/results/priboot/results.json"
+ENV CHALLENGE_TRACK_CODENAME="SENSORS"
+
+
+
+ENV HTTP_PROXY ""
+ENV HTTPS_PROXY ""
+ENV http_proxy ""
+ENV https_proxy ""
+
+
+ENV USER="deep"
+
+

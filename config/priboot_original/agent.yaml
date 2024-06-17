@@ -1,0 +1,65 @@
+entrypoint: my_agents.agent
+entrypoint_model: my_agents.priboot
+
+device: cuda:6
+epochs: 500 
+batch_size: 256 
+patience: 30
+repeat_action: 1
+num_actions: 1
+lr: 0.0001
+weight_decay: 1.e-7
+max_grad_norm: 100.0
+pred_len: 4 
+default_speed: 4.0
+max_throttle : 1.0 
+brake_speed : 0.4 
+brake_ratio : 1.1 
+clip_delta : 0.25 
+clip_throttle : 1.0 
+num_workers: 64
+aug: True
+aug_prob: 0.5
+aug_dx: 5
+aug_dy: 1
+aug_r: 10
+
+
+aim_dist : 4.0 
+angle_thresh : 0.3
+dist_thresh : 10 
+
+speed_weight: 0.05
+
+vm:
+  num_inputs: 11
+  fc_dims: 32
+  out_dims: 32
+bev:
+  n_channels: 3
+  out_dims: 256
+  size: 256
+  pretrained: True
+
+gru: 
+  concat_target_point: True
+  hidden_size: 128
+
+speed_dims: 64
+
+controller:
+  turn_KP : 1.75
+  turn_KI : 0.75
+  turn_KD : 0.3
+  turn_n :  20 
+
+  speed_KP : 5.0
+  speed_KI : 0.5
+  speed_KD : 1.0
+  speed_n :  20 
+
+use_stuck: True
+stuck_threshold: 200 
+creep_duration: 40 
+x_creep: 2.5
+velocity_creep: 1.0

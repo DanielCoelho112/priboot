@@ -1,0 +1,12 @@
+image:
+  id: image
+  type: sensor.camera.rgb
+  x: 0.7
+  y: -0.4
+  z: 1.6
+  roll: 0.0
+  pitch: 0.0
+  yaw: 0.0
+  width: 256
+  height: 256
+  fov: 100
